@@ -78,7 +78,68 @@ Returns totaled £611,342 against £8.91M gross sales — a 6.9% return rate, co
 
 ## 7. Next Steps
 
-- Migrate ad hoc SQL exploration into version-controlled, parameterized scripts
-- Add a proper project structure (config separated from credentials, requirements file, README)
-- Extend analysis to product-level trends and the `unknown_customer_sales` segment
-- Push to GitHub with clear documentation for portfolio use
+The pipeline is fully functional end-to-end (data profiling, cleaning, and loading are automated via `main.py`). Remaining opportunities for extension:
+
+- Extend analysis to product-level trends (e.g., seasonality by product category)
+- Analyze the `unknown_customer_sales` segment separately to understand who these customers might be
+- Automate the `suspicious_pricing` review workflow (currently requires manual inspection)
+- Add unit tests for the data-splitting logic
+
+---
+
+## 8. How to Run
+
+### Prerequisites
+- Python 3.10+
+- SQL Server (local or remote) with the [ODBC Driver 18 for SQL Server](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server) installed
+
+### Setup
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/AlHassanMohamed-db/online-retail-pipeline.git
+   cd online-retail-pipeline
+   ```
+
+2. Install dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Place the raw dataset at `data/Online Retail.xlsx`
+   (dataset source: [UCI Online Retail Dataset](https://archive.ics.uci.edu/dataset/352/online+retail))
+
+4. Create a `.env` file in the project root with your SQL Server connection details:
+   ```
+   DB_SERVER=your_server_name
+   DB_DATABASE=OnlineRetailDB
+   ```
+
+5. Create the target database in SQL Server (run in SSMS or `sqlcmd`):
+   ```sql
+   CREATE DATABASE OnlineRetailDB;
+   ```
+
+### Run the pipeline
+
+```bash
+python main.py
+```
+
+This will profile the raw data, split it into `clean_sales`, `unknown_customer_sales`, and `suspicious_pricing`, run a row-count reconciliation check, and load all three tables into SQL Server.
+
+### Project structure
+
+```
+online-retail-pipeline/
+├── README.md
+├── requirements.txt
+├── .env                  # not committed — holds your local DB credentials
+├── main.py                # entry point, runs the full pipeline
+├── data/
+│   └── Online Retail.xlsx # not committed — raw dataset
+└── scripts/
+    ├── 01_explore_data.py
+    ├── 02_clean_and_split.py
+    └── 03_load_to_sql.py
+```
