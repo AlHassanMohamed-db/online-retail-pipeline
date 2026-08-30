@@ -67,7 +67,7 @@ Returns totaled £611,342 against £8.91M gross sales — a 6.9% return rate, co
 
 ---
 
-## 6. Engineering Practices Applied
+## 7. Engineering Practices Applied
 
 - Validated assumptions against raw data before trusting query output (e.g., diagnosing the "month 13–31" anomaly back to a data type issue)
 - Distinguished statistically reliable aggregates (large sample) from unreliable ones (single-invoice countries) before drawing conclusions
@@ -76,18 +76,33 @@ Returns totaled £611,342 against £8.91M gross sales — a 6.9% return rate, co
 
 ---
 
-## 7. Next Steps
+## 8. Observability & Automation
 
-The pipeline is fully functional end-to-end (data profiling, cleaning, and loading are automated via `main.py`). Remaining opportunities for extension:
+To move the pipeline from a manually-run script toward something closer to a production workflow, two additions were made:
+
+**Logging**
+`print()` statements were replaced with Python's `logging` module, writing timestamped, severity-tagged events to both the console and a persistent `pipeline.log` file. Each pipeline stage (data load, split, upload) logs its row counts, and any failure is logged with its error message before being re-raised — ensuring failures are both visible immediately and recoverable from the log afterward, rather than silently lost once the console closes.
+
+**Scheduled execution**
+The pipeline was configured to run automatically once per day via Windows Task Scheduler, invoking `python main.py` with the project root set as the working directory (required for the script's relative file paths to resolve correctly). This was tested with a manual trigger and confirmed via new entries appended to `pipeline.log`.
+
+*Note: local Task Scheduler is a reasonable way to demonstrate the automation concept, but a production deployment would run on an always-on server or a managed orchestrator (e.g., Apache Airflow) rather than a personal machine.*
+
+---
+
+## 9. Next Steps
+
+The pipeline is fully functional end-to-end (data profiling, cleaning, loading, logging, and daily scheduling are all automated). Remaining opportunities for extension:
 
 - Extend analysis to product-level trends (e.g., seasonality by product category)
 - Analyze the `unknown_customer_sales` segment separately to understand who these customers might be
 - Automate the `suspicious_pricing` review workflow (currently requires manual inspection)
 - Add unit tests for the data-splitting logic
+- Migrate scheduling from Windows Task Scheduler to a proper orchestrator (e.g., Airflow) for production-grade reliability
 
 ---
 
-## 8. How to Run
+## 10. How to Run
 
 ### Prerequisites
 - Python 3.10+
