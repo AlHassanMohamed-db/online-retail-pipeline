@@ -1,0 +1,36 @@
+2026-08-27 23:29:19,078 - INFO - Pipeline Started
+2026-08-27 23:30:12,426 - INFO - Row data loaded : 541909 rows , 8 colums
+2026-08-27 23:30:12,740 - INFO - Split Complete : clean = 406789, 132603,2517
+2026-08-27 23:44:23,367 - INFO - Pipeline Started
+2026-08-27 23:45:17,524 - INFO - Row data loaded : 541909 rows , 8 colums
+2026-08-27 23:45:17,839 - INFO - Split Complete : clean = 406789, unknown_customer_sales= 132603,suspicious_pricing= 2517
+2026-08-29 11:57:18,683 - INFO - Pipeline Started
+2026-08-29 11:58:15,299 - INFO - Row data loaded : 541909 rows , 8 colums
+2026-08-29 11:58:15,631 - INFO - Split Complete : clean = 406789, unknown_customer_sales= 132603,suspicious_pricing= 2517
+2026-08-29 11:58:15,795 - INFO - Uploading table 'clean_sales' (406789 rows)
+2026-08-29 11:58:35,193 - INFO - table 'clean_sales' uploaded successfully
+2026-08-29 11:58:35,193 - INFO - Uploading table 'unknown_customer_sales' (132603 rows)
+2026-08-29 11:59:36,326 - INFO - table 'unknown_customer_sales' uploaded successfully
+2026-08-29 11:59:36,327 - INFO - Uploading table 'suspicious_pricing' (2517 rows)
+2026-08-29 11:59:37,684 - INFO - table 'suspicious_pricing' uploaded successfully
+2026-08-29 11:59:37,684 - INFO - All tables uploaded successfully!
+2026-08-30 15:23:41,031 - INFO - Pipeline Started
+2026-08-30 15:24:34,895 - INFO - Row data loaded : 541909 rows , 8 colums
+2026-08-30 15:24:35,196 - INFO - Split Complete : clean = 406789, unknown_customer_sales= 132603,suspicious_pricing= 2517
+2026-08-30 15:24:35,353 - INFO - Uploading table 'clean_sales' (406789 rows)
+2026-08-30 15:24:54,284 - INFO - table 'clean_sales' uploaded successfully
+2026-08-30 15:24:54,285 - INFO - Uploading table 'unknown_customer_sales' (132603 rows)
+2026-08-30 15:25:55,802 - INFO - table 'unknown_customer_sales' uploaded successfully
+2026-08-30 15:25:55,802 - INFO - Uploading table 'suspicious_pricing' (2517 rows)
+2026-08-30 15:25:57,142 - INFO - table 'suspicious_pricing' uploaded successfully
+2026-08-30 15:25:57,142 - INFO - All tables uploaded successfully!
+2026-08-30 16:11:42,086 - INFO - Pipeline Started
+2026-08-30 16:12:36,759 - INFO - Row data loaded : 541909 rows , 8 colums
+2026-08-30 16:12:37,067 - INFO - Split Complete : clean = 406789, unknown_customer_sales= 132603,suspicious_pricing= 2517
+2026-08-30 16:12:37,227 - INFO - Uploading table 'clean_sales' (406789 rows)
+2026-08-30 16:12:56,358 - INFO - table 'clean_sales' uploaded successfully
+2026-08-30 16:12:56,358 - INFO - Uploading table 'unknown_customer_sales' (132603 rows)
+2026-08-30 16:14:04,411 - INFO - table 'unknown_customer_sales' uploaded successfully
+2026-08-30 16:14:04,411 - INFO - Uploading table 'suspicious_pricing' (2517 rows)
+2026-08-30 16:14:06,695 - INFO - table 'suspicious_pricing' uploaded successfully
+2026-08-30 16:14:06,695 - INFO - All tables uploaded successfully!

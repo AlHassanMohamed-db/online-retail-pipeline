@@ -1,5 +1,6 @@
 import os
 import pyodbc
+import logging
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 
@@ -29,13 +30,22 @@ def get_raw_connection():
 def get_engine():
     return create_engine("mssql+pyodbc://" , creator=get_raw_connection)
 
+
 def load_tables(clean_sales, unknown_customer_sales, suspicious_pricing):
     engine= get_engine()
-    clean_sales.to_sql("clean_sales",engine,if_exists="replace",index=False)
-    unknown_customer_sales.to_sql("unknown_customer_sales",engine,if_exists="replace",index=False)
-    suspicious_pricing.to_sql("suspicious_pricing",engine,if_exists="replace",index=False)
 
-    print("All tables uploaded successfully!")
+    tables = {
+        "clean_sales" : clean_sales,
+        "unknown_customer_sales" : unknown_customer_sales,
+        "suspicious_pricing" : suspicious_pricing
+    }
+   
+    for table_name , df in tables.items():
+        logging.info(f"Uploading table '{table_name}' ({len(df)} rows)")
+        df.to_sql(table_name,engine,if_exists = "replace" , index=False)
+        logging.info(f"table '{table_name}' uploaded successfully")
+
+    logging.info("All tables uploaded successfully!")
 
 if __name__ == "__main__":
      print("Run this script's load_tables() with your cleaned DataFrames.")
